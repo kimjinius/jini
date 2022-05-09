@@ -37,7 +37,9 @@ interface LightAPIS {
 
     @DELETE("lights/{id}/")
     @Headers("accept: application/json", "content-type: application/json")
-    fun deleteLight()
+    fun deleteLight(
+        @Path("id") id: String
+    ):Call<Void>
 
 
     companion object {

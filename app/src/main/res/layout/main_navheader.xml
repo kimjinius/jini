@@ -24,6 +24,7 @@
         android:textColor="@color/black"
         android:text="user_id"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:id="@+id/profile_id"/>
+        android:id="@+id/profile_id"
+        android:fontFamily="@font/regular"/>
 
 </LinearLayout>

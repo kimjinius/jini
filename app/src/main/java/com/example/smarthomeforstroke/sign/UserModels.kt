@@ -30,9 +30,26 @@ data class ReExerciseInfo(
     var rehabilitation_time : String
 )
 
+data class ReExerciseResponse(
+    var exerciseScores : List<ReExerciseInfo>
+)
+
 data class ImgInfo(
     var img : String
 )
 
+data class ReLanguageInfo(
+    var user_id : String,
+    var language_score : Int,
+    var rehabilitation_time: String
+)
+
+data class ReLanguageResponse(
+    var languageScores : List<ReLanguageInfo>
+)
+
+data class UserId(
+    var user_id: String
+)
 
 

@@ -133,6 +133,7 @@ class SmartHome : AppCompatActivity() {
             if (status != TextToSpeech.ERROR) {
                 // 언어를 선택한다.
                 tts!!.language = Locale.KOREAN
+                tts!!.setPitch(0.5f)
             }
         }
 
@@ -253,16 +254,12 @@ class SmartHome : AppCompatActivity() {
                     Log.e("CameraX_Debug", "Photo capture failed: ${exc.message}", exc)
                 }
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-//                    val resultIntent = Intent()
-//                    setResult(Activity.RESULT_OK, resultIntent)
-//                    finish()
                     val bitmap = BitmapFactory.decodeFile(filepath)
-//                    binding.imageView.setImageBitmap(rotatedBitmap(bitmap))
-
+                    val resized = Bitmap.createScaledBitmap(bitmap, 256, 256, true)
                     val baos = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 70, baos)
+                    resized.compress(Bitmap.CompressFormat.JPEG, 60, baos)
                     val bytes = baos.toByteArray()
-                    val temp = Base64.encodeToString(bytes, Base64.DEFAULT)
+                    val temp = Base64.encodeToString(bytes, Base64.NO_WRAP)
 
                     Log.d("temp", temp.toString())
 
@@ -332,6 +329,7 @@ class SmartHome : AppCompatActivity() {
                                 toast("9")
                             }
                             else {
+                                Log.d("errorcode finger", response.code().toString())
                                 toast("손가락 모양을 인식할 수 없습니다.")
                             }
                         }

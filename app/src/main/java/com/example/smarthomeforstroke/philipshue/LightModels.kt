@@ -68,10 +68,6 @@ data class PutLight(
     val on: Boolean
 )
 
-data class ResponsePutLight(
-    val success:String
-)
-
 data class PutBright(
     val bri : Int
 )

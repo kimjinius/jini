@@ -42,9 +42,6 @@ class MainActivity : AppCompatActivity() {
         var pref = getSharedPreferences(PREFERENCE, MODE_PRIVATE)
         var id = pref.getString("user_id", "")
         var pw = pref.getString("pw", "")
-        binding.sessionInfo.text = "환영합니다" + id + "님" + pw
-
-
 
         binding.btnCamera.setOnClickListener {
             val nextIntent = Intent(this, SmartHome::class.java)
@@ -78,11 +75,9 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                     true
-                }R.id.menu_tutorial_home -> {
-
-                    true
-                }R.id.menu_tutorial_re -> {
-
+                }R.id.manage_score -> {
+                    val intent = Intent(this, ScoreManageActivity::class.java)
+                    startActivity(intent)
                     true
                 }else -> false
             }
@@ -115,31 +110,5 @@ class MainActivity : AppCompatActivity() {
         mBinding = null
         super.onDestroy()
     }
-//
-//    private fun checkPermissions(permissions: Array<String>, permissionsRequest: Int): Boolean {
-//        val permissionList : MutableList<String> = mutableListOf()
-//        for(permission in permissions){
-//            val result = ContextCompat.checkSelfPermission(this, permission)
-//            if(result != PackageManager.PERMISSION_GRANTED){
-//                permissionList.add(permission)
-//            }
-//        }
-//        if(permissionList.isNotEmpty()){
-//            ActivityCompat.requestPermissions(this, permissionList.toTypedArray(), permissionsRequest)
-//            return false
-//        }
-//        return true
-//    }
-//
-//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        for(result in grantResults){
-//            if(result != PackageManager.PERMISSION_GRANTED){
-//                Toast.makeText(this, "권한 승인 부탁드립니다.", Toast.LENGTH_SHORT).show()
-//                finish()
-//                return
-//            }
-//        }
-//    }
 
 }

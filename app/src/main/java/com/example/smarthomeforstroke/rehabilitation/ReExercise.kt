@@ -120,7 +120,8 @@ class ReExercise : AppCompatActivity() {
 
             }
             var builder = AlertDialog.Builder(this@ReExercise)
-            builder.setTitle("점수를 저장합니다.")
+            builder.setTitle("조금만 기다려주세요")
+            builder.setMessage("점수를 저장합니다.")
             runOnUiThread{
                 builder.show()
             }
@@ -140,10 +141,9 @@ class ReExercise : AppCompatActivity() {
                 ) {
                     var builder = AlertDialog.Builder(this@ReExercise)
                     builder.setTitle("점수 저장 되었습니다")
-                    builder.setMessage(cnt.toString() + "점")
-                    runOnUiThread{
-                        builder.show()
-                    }
+                    builder.setMessage(cnt.toString() + "점이에요!♡")
+                    builder.show()
+                    Thread.sleep(3000)
                     startActivity(intent)
                     finish()
                 }
@@ -182,16 +182,12 @@ class ReExercise : AppCompatActivity() {
                     Log.e("CameraX_Debug", "Photo capture failed: ${exc.message}", exc)
                 }
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-//                    val resultIntent = Intent()
-//                    setResult(Activity.RESULT_OK, resultIntent)
-//                    finish()
                     val bitmap = BitmapFactory.decodeFile(filepath)
-//                    binding.imageView.setImageBitmap(rotatedBitmap(bitmap))
-
+                    val resized = Bitmap.createScaledBitmap(bitmap, 256, 256, true)
                     val baos = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 70, baos)
+                    resized.compress(Bitmap.CompressFormat.JPEG, 60, baos)
                     val bytes = baos.toByteArray()
-                    val temp = Base64.encodeToString(bytes, Base64.DEFAULT)
+                    val temp = Base64.encodeToString(bytes, Base64.NO_WRAP)
 
                     Log.d("temp", temp.toString())
 
@@ -243,7 +239,7 @@ class ReExercise : AppCompatActivity() {
                                 answer.add("9")
                             }
                             else {
-                                toast("error")
+                                toast("손가락 인식 실패")
                                 answer.add("error")
                             }
                         }

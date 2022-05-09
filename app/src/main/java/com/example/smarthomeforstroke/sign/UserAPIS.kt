@@ -29,11 +29,11 @@ interface UserAPIS {
         @Body jsonparams: ReExerciseSend
     ):Call<ReExerciseInfo>
 
-    @GET("/physical-rehabilitation/")
+    @POST("/physical-rehabilitation/")
     @Headers("accept: application/json", "content-type: application/json")
     fun getReExercise(
         @Body jsonparams: UserInfo
-    ):Call<ReExerciseInfo>
+    ):Call<ReExerciseResponse>
 
     @POST("/gestures/")
     @Headers("accept: application/json", "content-type: application/json")
@@ -41,11 +41,28 @@ interface UserAPIS {
         @Body jsonparams: ImgInfo
     ):Call<String>
 
+    @POST("/language-rehabilitation/")
+    @Headers("accept: application/json", "content-type: application/json")
+    fun getReLanguage(
+        @Body jsonparams: UserInfo
+    ):Call<ReLanguageResponse>
+
+    @PUT("/duplicate-check/")
+    @Headers("accept: application/json", "content-type: application/json")
+    fun putDuplicate(
+        @Body jsonparams: UserId
+    ):Call<String>
+
+    @POST("/members-info/")
+    @Headers("accept: application/json", "content-type: application/json")
+    fun postUserInfo(
+        @Body jsonparams: UserInfo
+    ):Call<SignUpInfo>
 
 
     companion object{
-        private const val ipv4 = "172.30.1.58"
-        private const val port = "8000"
+        private const val ipv4 = "3.37.253.204"
+        private const val port = "80"
         fun create(): UserAPIS{
             val gson: Gson = GsonBuilder().setLenient().create()
             val BASE_URL = "http://$ipv4:$port"
